@@ -9,9 +9,15 @@ object Main{
     private lateint var producer: FlightProducer
 
     @JvmStatic
-    fun main(args: Array<String>) {
-    io.ktor.server.netty.EngineMain.main(args)
-}
+    fun main(args: Array<String>) = runBlocking(Dispatchers.Default) {
+        logger.info("Starting Flight Data Generator")
+        try {
+            val configFil=args.getOrNull(0)
+        }
+        catch(Exception e) {
+            val configFil=args.getOrNull(0)
+        }
+    }
 }
 
 
