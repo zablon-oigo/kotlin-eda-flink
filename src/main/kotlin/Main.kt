@@ -23,6 +23,16 @@ object Main{
             producer.start(simulator.getFlightFlow(), this)
             logger.info("data generator started")
 
+            Runtime.getRuntime().addShutdownHook(Thread {
+                logger.info("Shutting down Flight Data Generator")
+                runBlocking {
+                    
+                    simulator.stop()
+                    producer.stop()
+                    coroutineContext.cancelChildren()
+                }
+            })
+
         }
         catch(Exception e) {
             val configFil=args.getOrNull(0)
