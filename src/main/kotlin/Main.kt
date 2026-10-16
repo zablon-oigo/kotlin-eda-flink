@@ -13,6 +13,16 @@ object Main{
         logger.info("Starting Flight Data Generator")
         try {
             val configFil=args.getOrNull(0)
+            
+            simulator = FlightSimulator(config.simulation)
+            simulator.initialize()
+            producer = FlightProducer(config.kafka)
+
+
+            simulator.start(this)
+            producer.start(simulator.getFlightFlow(), this)
+            logger.info("data generator started")
+
         }
         catch(Exception e) {
             val configFil=args.getOrNull(0)
