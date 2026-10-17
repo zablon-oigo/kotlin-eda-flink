@@ -19,4 +19,12 @@ import kotlin.random.Random
 
 class FlightSimulator(
     private val config: SimulationConfig
-)
+){
+
+    private val logger = LoggerFactory.getLogger(FlightSimulator::class.java)
+    private val flights = mutableListOf<Flight>()
+    private val flightFlow = MutableSharedFlow<Flight>(replay = 0, extraBufferCapacity = 100)
+    private var lastUpdateTime = Instant.now()
+    private var running = false
+
+}
