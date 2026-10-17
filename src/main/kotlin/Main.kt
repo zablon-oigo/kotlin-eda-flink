@@ -33,9 +33,11 @@ object Main{
                 }
             })
 
+            Thread.currentThread().join()
+
         }
         catch(Exception e) {
-            val configFil=args.getOrNull(0)
+            exitProcess(1)
         }
     }
 }
