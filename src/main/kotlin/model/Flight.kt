@@ -54,4 +54,20 @@ data class Flight(
             altitude < 30000 -> verticalSpeed = 500.0
         }
     }
+        fun toMap(): Map<String, Any> {
+        return mapOf(
+            "flightId" to flightId,
+            "callsign" to callsign,
+            "latitude" to latitude,
+            "longitude" to longitude,
+            "altitude" to altitude,
+            "heading" to heading,
+            "speed" to speed,
+            "verticalSpeed" to verticalSpeed,
+            "origin" to origin,
+            "destination" to destination,
+            "status" to status.name,
+            "timestamp" to timestamp.toEpochMilli()
+        )
+    }
 }
