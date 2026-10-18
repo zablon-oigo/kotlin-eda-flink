@@ -39,4 +39,19 @@ data class Flight(
 
         timestamp = Instant.now()
         }
+
+
+        fun randomizeMovement() {
+        heading = (heading + Random.nextDouble(-5.0, 5.0)) % 360.0
+        if (heading < 0) heading += 360.0
+
+        speed = (speed + Random.nextDouble(-10.0, 10.0)).coerceIn(300.0, 600.0)
+
+        verticalSpeed = (verticalSpeed + Random.nextDouble(-100.0, 100.0)).coerceIn(-1000.0, 1000.0)
+
+        when {
+            altitude > 40000 -> verticalSpeed = -500.0
+            altitude < 30000 -> verticalSpeed = 500.0
+        }
+    }
 }
