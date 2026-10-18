@@ -24,4 +24,19 @@ data class Flight(
     val destination: String,
     var status: FlightStatus,
     var timestamp: Instant = Instant.now()
-) 
+){
+        fun updatePosition(elapsedSeconds: Double, speedFactor: Double = 1.0) {
+        val speedInDegreesPerSecond = speed * 0.0003 * speedFactor
+
+        val headingRadians = Math.toRadians(heading)
+        val latitudeChange = speedInDegreesPerSecond * elapsedSeconds * cos(headingRadians)
+        val longitudeChange = speedInDegreesPerSecond * elapsedSeconds * sin(headingRadians)
+
+        latitude += latitudeChange
+        longitude += longitudeChange
+
+        altitude += (verticalSpeed / 60.0 * elapsedSeconds).toInt()
+
+        timestamp = Instant.now()
+        }
+}
