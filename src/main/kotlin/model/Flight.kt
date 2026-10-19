@@ -70,4 +70,20 @@ data class Flight(
             "timestamp" to timestamp.toEpochMilli()
         )
     }
+    fun toAvro(): FlightData {
+        return FlightData.newBuilder()
+            .setFlightId(flightId)
+            .setCallsign(callsign)
+            .setLatitude(latitude)
+            .setLongitude(longitude)
+            .setAltitude(altitude)
+            .setHeading(heading)
+            .setSpeed(speed)
+            .setVerticalSpeed(verticalSpeed)
+            .setOrigin(origin)
+            .setDestination(destination)
+            .setStatus(convertStatus(status))
+            .setTimestamp(timestamp)
+            .build()
+    }
 }
