@@ -86,4 +86,13 @@ data class Flight(
             .setTimestamp(timestamp)
             .build()
     }
+
+    private fun convertStatus(status: FlightStatus): AvroFlightStatus {
+        return when (status) {
+            FlightStatus.ON_TIME -> AvroFlightStatus.ON_TIME
+            FlightStatus.DELAYED -> AvroFlightStatus.DELAYED
+            FlightStatus.CANCELLED -> AvroFlightStatus.CANCELLED
+            FlightStatus.DIVERTED -> AvroFlightStatus.DIVERTED
+        }
+    }
 }
