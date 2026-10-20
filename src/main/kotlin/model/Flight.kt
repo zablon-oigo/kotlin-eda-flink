@@ -142,5 +142,16 @@ data class Flight(
                 status = status
             )
         }
+        private fun randomStatus(probabilities: Map<String, Double>): FlightStatus {
+            val random = Random.nextDouble()
+            var cumulativeProbability = 0.0
+
+            for ((status, probability) in probabilities) {
+                cumulativeProbability += probability
+                if (random < cumulativeProbability) {
+                    return FlightStatus.valueOf(status)
+                }
+            }
+            return FlightStatus.ON_TIME
     }
 }
