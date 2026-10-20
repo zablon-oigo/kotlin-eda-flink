@@ -127,6 +127,20 @@ data class Flight(
             val destination = destinations.random()
 
             val status = randomStatus(config.flightStatusProbabilities)
+
+            return Flight(
+                flightId = flightId,
+                callsign = callsign,
+                latitude = latitude,
+                longitude = longitude,
+                altitude = altitude,
+                heading = heading,
+                speed = speed,
+                verticalSpeed = verticalSpeed,
+                origin = origin,
+                destination = destination,
+                status = status
+            )
         }
     }
 }
