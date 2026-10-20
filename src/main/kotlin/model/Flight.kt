@@ -95,4 +95,38 @@ data class Flight(
             FlightStatus.DIVERTED -> AvroFlightStatus.DIVERTED
         }
     }
+
+    companion object {
+        fun createRandom(id: Int, config: dev.gamov.flightdemo.generator.config.SimulationConfig): Flight {
+            val flightId = "FL$id"
+            val callsign = "AIR$id"
+
+            val latitude = Random.nextDouble(
+                config.initialLatitudeMin,
+                config.initialLatitudeMax
+            )
+            val longitude = Random.nextDouble(
+                config.initialLongitudeMin,
+                config.initialLongitudeMax
+            )
+
+            val altitude = Random.nextInt(
+                config.initialAltitudeMin,
+                config.initialAltitudeMax
+            )
+
+            val heading = Random.nextDouble(0.0, 360.0)
+
+            val speed = Random.nextDouble(300.0, 600.0)
+
+            val verticalSpeed = Random.nextDouble(-500.0, 500.0)
+
+            val origins = listOf("JFK", "LAX", "ORD", "DFW", "DEN", "SEA", "SFO", "ATL", "MIA", "BOS")
+            val destinations = listOf("LHR", "CDG", "FRA", "AMS", "MAD", "FCO", "ZRH", "IST", "DXB", "HKG")
+            val origin = origins.random()
+            val destination = destinations.random()
+
+            val status = randomStatus(config.flightStatusProbabilities)
+        }
+    }
 }
