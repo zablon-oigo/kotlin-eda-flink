@@ -1,4 +1,4 @@
-package org.example.simulation;
+package org.example.simulation
 
 
 
