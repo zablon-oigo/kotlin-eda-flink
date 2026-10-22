@@ -29,6 +29,15 @@ dependencies {
     implementation(ktorLibs.server.netty)
     implementation(libs.logback.classic)
 
+    implementation("org.apache.kafka:kafka-clients:3.9.0")
+    implementation("io.confluent:kafka-avro-serializer:7.5.1")
+    implementation("io.confluent:kafka-schema-registry-client:7.5.1")
+    implementation("org.apache.avro:avro:1.12.0")
+
+
+    implementation("com.sksamuel.hoplite:hoplite-core:2.7.5")
+    implementation("com.sksamuel.hoplite:hoplite-yaml:2.7.5")
+
     testImplementation(kotlin("test"))
     testImplementation(ktorLibs.server.testHost)
 }
