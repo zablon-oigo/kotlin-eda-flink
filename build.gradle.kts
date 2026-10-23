@@ -44,3 +44,15 @@ dependencies {
     testImplementation(kotlin("test"))
     testImplementation(ktorLibs.server.testHost)
 }
+
+
+avro {
+    isCreateSetters.set(true)
+    isCreateOptionalGetters.set(false)
+    isGettersReturnOptional.set(false)
+    fieldVisibility.set("PRIVATE")
+    outputCharacterEncoding.set("UTF-8")
+    stringType.set("String")
+    templateDirectory.set(null as String?)
+    isEnableDecimalLogicalType.set(true)
+}
