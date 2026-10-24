@@ -2,6 +2,10 @@ package org.example.config
 
 import java.time.Duration
 
+data class GeneratorConfig(
+    val kafka: KafkaConfig,
+    val simulation: SimulationConfig
+) 
 
 data class SimulationConfig(
     val numFlights: Int = 100,
