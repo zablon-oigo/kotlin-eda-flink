@@ -5,7 +5,26 @@ import java.time.Duration
 data class GeneratorConfig(
     val kafka: KafkaConfig,
     val simulation: SimulationConfig
-) 
+) {
+    companion object{
+        fun load(configFile: String): GeneratorConfig {
+            return ConfigUtils.loadConfig(
+                configFile = configFile,
+                classpathResource = "/generator-config.yaml",
+                defaultConfig = {
+                    GeneratorConfig(
+                        kafka = KafkaConfig(
+                            bootstrapServers = "localhost:29092",
+                            schemaRegistryUrl = "http://localhost:8081",
+                            topic = "flights"
+                        ),
+                        simulation = SimulationConfig()
+                    )
+                }
+            )
+        }
+    }
+}
 
 
 data class KafkaConfig(
