@@ -1,6 +1,9 @@
 package org.example.config
 
 import java.time.Duration
+import com.sksamuel.hoplite.ConfigAlias
+import org.example.config.ConfigUtils
+import org.example.config.KafkaConfigBase
 
 data class GeneratorConfig(
     val kafka: KafkaConfig,
