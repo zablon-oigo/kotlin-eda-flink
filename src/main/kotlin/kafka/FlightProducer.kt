@@ -20,4 +20,12 @@ import java.util.concurrent.atomic.AtomicLong
 class FlightProducer(
     private val config: KafkaConfig,
     private val producer: KafkaProducer<String, FlightData>? = null
-) 
+) {
+
+    private val logger = LoggerFactory.getLogger(FlightProducer::class.java)
+    private val kafkaProducer: KafkaProducer<String, FlightData>
+    private val messageCounter = AtomicLong(0)
+    private var running = false
+    
+
+}
