@@ -52,5 +52,19 @@ class FlightProducer(
 
         }
     
+        fun start(flightFlow: Flow<Flight>, scope: CoroutineScope) {
+            if (running) {
+                logger.warn("Flight producer is already running")
+                return
+            }
 
+            running = true
+            logger.info("Starting flight producer to topic: ${config.topic}")
+
+            scope.launch(Dispatchers.IO) {
+                flightFlow.collect { flight ->
+                    sendFlight(flight)
+                }
+            }
+        }
 }
