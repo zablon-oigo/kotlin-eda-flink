@@ -26,6 +26,13 @@ class FlightProducer(
     private val kafkaProducer: KafkaProducer<String, FlightData>
     private val messageCounter = AtomicLong(0)
     private var running = false
+
+
+    init {
+        kafkaProducer = producer ?: createProducer()
+        logger.info("Kafka producer initialized with bootstrap servers: ${config.bootstrapServers}")
+        logger.info("Schema Registry URL: ${config.schemaRegistryUrl}")
+    }
     
 
 }
