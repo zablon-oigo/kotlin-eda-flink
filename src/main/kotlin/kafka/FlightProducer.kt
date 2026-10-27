@@ -33,6 +33,24 @@ class FlightProducer(
         logger.info("Kafka producer initialized with bootstrap servers: ${config.bootstrapServers}")
         logger.info("Schema Registry URL: ${config.schemaRegistryUrl}")
     }
+        private fun createProducer(): KafkaProducer<String, FlightData> {
+        val props = Properties().apply {
+            put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, config.bootstrapServers)
+            put(ProducerConfig.CLIENT_ID_CONFIG, config.clientId)
+            put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer::class.java.name)
+            put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaAvroSerializer::class.java.name)
+            put(AbstractKafkaSchemaSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, config.schemaRegistryUrl)
+            put(ProducerConfig.ACKS_CONFIG, config.acks)
+            put(ProducerConfig.RETRIES_CONFIG, config.retries)
+            put(ProducerConfig.BATCH_SIZE_CONFIG, config.batchSize)
+            put(ProducerConfig.LINGER_MS_CONFIG, config.lingerMs)
+            put(ProducerConfig.BUFFER_MEMORY_CONFIG, config.bufferMemory)
+
+
+
+            return KafkaProducer(props)
+
+        }
     
 
 }
