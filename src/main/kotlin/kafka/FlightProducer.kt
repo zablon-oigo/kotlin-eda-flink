@@ -67,4 +67,10 @@ class FlightProducer(
                 }
             }
         }
+
+        fun stop() {
+        running = false
+        kafkaProducer.close()
+        logger.info("Flight producer stopped after sending ${messageCounter.get()} messages")
+    }
 }
