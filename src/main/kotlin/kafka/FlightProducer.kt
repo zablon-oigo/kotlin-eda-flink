@@ -73,4 +73,28 @@ class FlightProducer(
         kafkaProducer.close()
         logger.info("Flight producer stopped after sending ${messageCounter.get()} messages")
     }
+    fun sendFlight(flight: Flight) {
+        try {
+            
+            val flightData = flight.toAvro()
+
+            val record = ProducerRecord(
+                config.topic,
+                flight.flightId,
+                flightData
+            )
+            kafkaProducer.send(record) { metadata, exception ->
+                if (exception != null) {
+                    logger.error("Error sending flight data to Kafka", exception)
+                } else {
+                    val count = messageCounter.incrementAndGet()
+                    if (count % 1000 == 0L) {
+                        logger.info("Sent $count messages to Kafka")
+                    }
+                    logger.debug("Sent flight data to Kafka: topic=${metadata.topic()}, partition=${metadata.partition()}, offset=${metadata.offset()}")
+                }
+            }
+        }catch (e: Exception) {
+            logger.error("Error preparing flight data for Kafka", e)
+        }
 }
